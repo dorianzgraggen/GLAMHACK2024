@@ -13,6 +13,7 @@ export const database = lines.map(line => {
         description: l[2],
         longitude: Number(l[3]),
         latitude: Number(l[4]),
-        images: l[5].split(",")
+        images: l[5].split(","),
+        distance: 0,
     }
 })
