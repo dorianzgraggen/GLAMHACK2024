@@ -1,6 +1,6 @@
 import raw_csv from "../data.csv?raw"
 
-const lines = raw_csv.split("\r\n").filter(l => l.length > 6);
+const lines = raw_csv.split(/\r?\n/).filter((l) => l.length > 6);
 lines.shift();
 
 export const database = lines.map(line => {
