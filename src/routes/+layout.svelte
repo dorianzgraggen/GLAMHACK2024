@@ -2,6 +2,7 @@
 	import { gps_accuracy, latitude, longitude, pictures_index, pinned_place_id } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import "../styles.css"
+	import { database } from '$lib/data';
 
 	onMount(async () => {
 		$pictures_index = Number(localStorage.getItem('pictures_index') || 0);
@@ -45,6 +46,15 @@
 
 <div class="content">
 	<slot></slot>
+</div>
+
+
+<div style="display: none">
+
+	{#each database as place}
+		<a href={"/place/" + place.id}></a>
+		<!-- <a href={"/place/" + place.id + "/camera"}></a> -->
+	{/each}
 </div>
 
 <style>
