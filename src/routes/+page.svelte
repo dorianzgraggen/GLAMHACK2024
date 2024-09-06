@@ -43,17 +43,19 @@
 
 	<h2>Your next destination</h2>
 
-
-
-	<div class="places">
-		{#key position_changed_counter}
-			{#each database as place}
-				{#if !$found_ids.includes(place.id)}
-					<PlaceListItem {place}></PlaceListItem>
-				{/if}
-			{/each}
-		{/key}
-	</div>
+	{#if $found_ids.length != database.length}
+		<div class="places">
+			{#key position_changed_counter}
+				{#each database as place}
+					{#if !$found_ids.includes(place.id)}
+						<PlaceListItem {place}></PlaceListItem>
+					{/if}
+				{/each}
+			{/key}
+		</div>
+	{:else}
+		<p>Congrats! You've discovered everything.</p>
+	{/if}
 
 
 	<h2>Your collection</h2>
