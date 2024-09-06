@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { pictures_index } from '$lib/stores';
 	import { onMount } from 'svelte';
 
@@ -13,3 +13,4 @@
 </script>
 
 <slot></slot>
+
