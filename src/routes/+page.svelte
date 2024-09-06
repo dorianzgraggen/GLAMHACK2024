@@ -25,57 +25,58 @@
 
 
 
+<div>
 
+	<div class="banner round"></div>
 
-<div class="banner round"></div>
+	<h2>Your pinned priority</h2>
+	{#key $longitude}
+		{#if pinned_place && !$found_ids.includes($pinned_place_id)}
+			<PlaceListItem place={pinned_place}></PlaceListItem>
+		{:else}
+		<div class="no-pin round">
 
-<h2>Your pinned priority</h2>
-{#key $longitude}
-	{#if pinned_place && !$found_ids.includes($pinned_place_id)}
-		<PlaceListItem place={pinned_place}></PlaceListItem>
-	{:else}
-	<div class="no-pin round">
-
-		<p>Pin a destination to see it here</p>
-	</div>
-	{/if}
-{/key}
-
-<h2>Your next destination</h2>
-
-
-
-<div class="places">
-	{#key position_changed_counter}
-		{#each database as place}
-			{#if !$found_ids.includes(place.id)}
-				<PlaceListItem {place}></PlaceListItem>
-			{/if}
-		{/each}
+			<p>Pin a destination to see it here</p>
+		</div>
+		{/if}
 	{/key}
-</div>
+
+	<h2>Your next destination</h2>
 
 
-<h2>Your collection</h2>
 
-
-{#if $found_ids.length > 0}
-	<div class="found-list bg-accent round">
+	<div class="places">
 		{#key position_changed_counter}
 			{#each database as place}
-				{#if $found_ids.includes(place.id)}
-					<a href={`/place/${place.id}`} class="found-item">
-						<div></div>
-						<div>{place.title}</div>
-					</a>
+				{#if !$found_ids.includes(place.id)}
+					<PlaceListItem {place}></PlaceListItem>
 				{/if}
 			{/each}
 		{/key}
 	</div>
-{:else}
-	<p>Start capturing places to add them to your collection</p>
-{/if}
 
+
+	<h2>Your collection</h2>
+
+
+	{#if $found_ids.length > 0}
+		<div class="found-list bg-accent round">
+			{#key position_changed_counter}
+				{#each database as place}
+					{#if $found_ids.includes(place.id)}
+						<a href={`/place/${place.id}`} class="found-item">
+							<div></div>
+							<div>{place.title}</div>
+						</a>
+					{/if}
+				{/each}
+			{/key}
+		</div>
+	{:else}
+		<p>Start capturing places to add them to your collection</p>
+	{/if}
+
+</div>
 
 <style>
 

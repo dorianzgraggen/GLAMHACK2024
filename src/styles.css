@@ -47,7 +47,7 @@ body {
 
 *, .regular {
     font-family: 'Inter Regular';
-    user-select: none;
+    /* user-select: none; */
 }
 
 p {

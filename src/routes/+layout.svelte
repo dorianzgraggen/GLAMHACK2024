@@ -156,7 +156,7 @@
 		color: white;
 	}
 
-	.content {
+	:global(.content > *) {
 		margin: 18px;
 	}
 </style>
