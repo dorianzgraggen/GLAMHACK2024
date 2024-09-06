@@ -31,7 +31,7 @@
 
 <h2>Your pinned priority</h2>
 {#key $longitude}
-	{#if pinned_place}
+	{#if pinned_place && !$found_ids.includes($pinned_place_id)}
 		<PlaceListItem place={pinned_place}></PlaceListItem>
 	{:else}
 	<div class="no-pin round">
