@@ -1,9 +1,11 @@
 import raw_csv from "../data.csv?raw"
+import type { Place } from "$lib/types"
 
 const lines = raw_csv.split(/\r?\n/).filter((l) => l.length > 6);
 lines.shift();
 
-export const database = lines.map(line => {
+
+export const database: Array<Place> = lines.map(line => {
     console.log("line", line)
     const l = line.split(";")
     console.log("l", l);

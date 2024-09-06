@@ -2,7 +2,8 @@
 	import { onMount } from 'svelte';
 	import { database } from '$lib/data';
 	import { calculateDistance, getSteps } from '$lib/dist';
-	import { latitude, longitude } from '$lib/stores';
+	import { found_ids, latitude, longitude, pinned_place_id } from '$lib/stores';
+	import PlaceListItem from '../components/PlaceListItem.svelte';
 
 	let position_changed_counter = 0;
 
@@ -10,21 +11,121 @@
 		database.forEach(record => {
 			record.distance = getSteps(calculateDistance($latitude, $longitude, record.latitude, record.longitude))
 		})
-		
+
 		database.sort((a, b) => a.distance - b.distance);
 
 		position_changed_counter++;
 	}
 
+	$: pinned_place = database.find(p => p.id == $pinned_place_id);
+
 </script>
 
 <!-- This is the landing page where we will have all the spots and the distances to the spots -->
 
-<h1>Spots</h1>
-{#key position_changed_counter}
-	{#each database as record}
-		<h2>current latitude: {$latitude}, current longitude: {$longitude} 
-			distance: {getSteps(calculateDistance($latitude, $longitude, record.latitude, record.longitude))}
-		</h2>
-	{/each}
-{/key}
+
+
+
+
+<div class="banner round"></div>
+
+<h2>Your pinned priority</h2>
+
+{#if pinned_place}
+	  <PlaceListItem place={pinned_place}></PlaceListItem>
+{:else}
+<div class="no-pin round">
+
+	<p>Pin a place to see it here</p>
+</div>
+{/if}
+
+<h2>Your next destination</h2>
+
+
+
+<div class="places">
+	{#key position_changed_counter}
+		{#each database as place}
+			{#if !$found_ids.includes(place.id)}
+				<PlaceListItem {place}></PlaceListItem>
+			{/if}
+		{/each}
+	{/key}
+</div>
+
+
+<h2>Found</h2>
+
+<div class="found-list bg-accent round">
+	{#key position_changed_counter}
+		{#each database as place}
+			{#if $found_ids.includes(place.id)}
+				<a href={`/place/${place.id}`} class="found-item">
+					<div></div>
+					<div>{place.title}</div>
+				</a>
+			{/if}
+		{/each}
+	{/key}
+</div>
+
+<style>
+
+	.banner {
+		background-image: url(https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x4.jpg);
+		background-size: cover;
+		background-position: center;
+		width: 100%;
+		aspect-ratio: 2.8;
+	}
+
+	.no-pin {
+		display: flex;
+		height: 200px;
+		outline: 2px dashed var(--accent);
+  		background: none;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.places {
+		width: 100%;
+		overflow-x: scroll;
+		display: grid;
+		grid-auto-flow: column;
+		gap: 12px;
+		grid-auto-columns: 140px;
+	}
+
+	.found-list {
+		display: grid;
+		gap: 12px;
+		grid-template-columns: 1fr 1fr 1fr;
+		padding: 12px;
+	}
+
+	.found-item {
+		text-align: center;
+		display: flex;
+		align-items: center;
+        justify-content: center;
+        flex-direction: column;
+		text-decoration: none;
+		color: black;
+	}
+
+
+	.found-item > div:first-child {
+		width: 80px;
+		height: 80px;
+		background-image: url(https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x4.jpg);
+		background-size: cover;
+		background-position: center;
+		border-radius: 9999px;
+	}
+
+	h2 {
+		font-size: 16px;
+	}
+</style>

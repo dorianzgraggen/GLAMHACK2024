@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+}
+
+:root {
+    --accent: #DFE7F7;
+    --accent-strong: #97B8E2;
+}
+
+
+.round {
+    border-radius: 10px;
+}
+
+.round-bottom {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.round-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.col-accent {
+    color: var(--accent);
+}
+
+.bg-accent {
+    background-color: var(--accent);
+}
+
+.bg-accent-strong {
+    background-color: var(--accent-strong);
+}
+
+@font-face {
+    font-family: 'Poppins Bold';
+    font-weight: bold;
+    src: url('/fonts/Poppins-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Inter Regular';
+    src: url('/fonts/static/Inter_18pt-Regular.ttf');
+}
+
+*, .regular {
+    font-family: 'Inter Regular';
+}
+
+.bold, h1, h2, h3, h4, h5, h6 {
+    font-family: "Poppins Bold";
+}
