@@ -7,8 +7,11 @@
     let stream: MediaStream | null = null;
     let isDialogOpen = true;
     let canCapture = false;
+    let capturedImageUrl: string | null = null;
+    let showCapturedView = false;
 
-    onMount(async () => {
+    // Function to initialize the camera stream
+    async function startCamera() {
         try {
             stream = await navigator.mediaDevices.getUserMedia({ video: true });
             if (video) {
@@ -17,6 +20,11 @@
         } catch (err) {
             console.error("Error accessing the camera:", err);
         }
+    }
+
+    // Initialize camera when component mounts
+    onMount(() => {
+        startCamera();
     });
 
     function closeDialog() {
@@ -26,42 +34,77 @@
 
     function captureImage() {
         if (!canCapture) return;
-        
+
         const canvas = document.createElement('canvas');
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         canvas.getContext('2d')?.drawImage(video, 0, 0);
-        const imageDataUrl = canvas.toDataURL('image/jpeg');
-        
-        dispatch('imageCaptured', imageDataUrl);
+        capturedImageUrl = canvas.toDataURL('image/jpeg');
+
+        showCapturedView = true; // Switch to captured view
+        dispatch('imageCaptured', capturedImageUrl);
+    }
+
+    function continueAction() {
+        console.log("Learn more button clicked");
+    }
+
+    function retakePicture() {
+        showCapturedView = false;  // Return to camera view
+        canCapture = true;
+        startCamera();  // Restart the camera
     }
 </script>
 
+<!-- Main container -->
 <div class="camera-container">
-    <video bind:this={video} autoplay playsinline></video>
-    
-    <div class="reference-image">
-        <img src="/img/2.jpg" alt="Reference image" />
-        <div class="expand-icon">↗</div>
-        <div class="arrow"></div>
-    </div>
-    
-    {#if isDialogOpen}
-        <div class="dialog-overlay">
-            <div class="dialog-content">
-                <p>To get access to the very exciting information about this monument you need to take an almost identical image of the historical one above</p>
-                <div class="button-container">
-                    <button on:click={closeDialog}>Got it!</button>
+    {#if !showCapturedView}
+        <!-- Normal camera view with reference image -->
+        <video bind:this={video} autoplay playsinline></video>
+        
+        <div class="reference-image">
+            <img src="/img/2.jpg" alt="Reference image" />
+            <div class="expand-icon">↗</div>
+            <div class="arrow"></div>
+        </div>
+        
+        {#if isDialogOpen}
+            <div class="dialog-overlay">
+                <div class="dialog-content">
+                    <p>To get access to the very exciting information about this monument you need to take an almost identical image of the historical one above</p>
+                    <div class="button-container">
+                        <button on:click={closeDialog}>Got it!</button>
+                    </div>
                 </div>
             </div>
+        {/if}
+
+        <div class="camera-controls" class:active={canCapture}>
+            <button on:click={captureImage} class="capture-btn" disabled={!canCapture}>
+                <div class="capture-btn-inner"></div>
+            </button>
         </div>
     {/if}
 
-    <div class="camera-controls" class:active={canCapture}>
-        <button on:click={captureImage} class="capture-btn" disabled={!canCapture}>
-            <div class="capture-btn-inner"></div>
-        </button>
-    </div>
+    {#if showCapturedView}
+        <!-- Captured view with Well done! text, captured image, and reference image -->
+        <div class="captured-view">
+            <p class="well-done-text">Well done!</p>
+
+            <div class="captured-image-container">
+                <img src={capturedImageUrl} alt="Captured image" class="captured-image" />
+            </div>
+
+            <div class="reference-image-bottom">
+                <img src="/img/2.jpg" alt="Reference image" />
+            </div>
+
+            <div class="button-container-captured">
+                <button on:click={retakePicture} class="retake-btn">Retake Picture</button>
+                <button on:click={continueAction} class="continue-btn">Learn more</button>
+            </div>
+        </div>
+    {/if}
 </div>
 
 <style>
@@ -73,6 +116,10 @@
         height: 100%;
         background-color: black;
         z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     video {
@@ -190,4 +237,81 @@
         cursor: not-allowed;
     }
 
+    .captured-view {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        background-color: white;
+    }
+
+    .well-done-text {
+        color: #333;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .captured-image-container {
+        width: 90%;
+        height: 40%;
+        border-radius: 15px;
+        border: 3px solid #ddd;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+    }
+
+    .captured-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+    .reference-image-bottom {
+        width: 90%;
+        height: 30%;
+        border-radius: 15px;
+        border: 3px solid #ddd;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-bottom: 30px;
+    }
+
+    .reference-image-bottom img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+    .button-container-captured {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .retake-btn, .continue-btn {
+        background-color: #b5d4f5;
+        color: #333;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 0 10px;
+    }
+
+    .retake-btn:hover, .continue-btn:hover {
+        background-color: #a4c3e5;
+    }
 </style>
