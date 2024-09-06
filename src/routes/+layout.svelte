@@ -1,10 +1,14 @@
 <script lang="ts">
-	import { gps_accuracy, latitude, longitude, pictures_index, pinned_place_id } from '$lib/stores';
+	import { found_ids, gps_accuracy, latitude, longitude, pictures_index, pinned_place_id } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import "../styles.css"
 	import { database } from '$lib/data';
+	import { page } from '$app/stores';
+
 
 	onMount(async () => {
+		const urlParams = new URLSearchParams(window.location.search);
+
 		$pictures_index = Number(localStorage.getItem('pictures_index') || 0);
 		console.log('pictures_index', $pictures_index);
 
@@ -34,6 +38,21 @@
 		}
 		pinned_place_id.subscribe(v => {
 			localStorage.setItem("pinned_place_id", v);
+		})
+
+		const found = localStorage.getItem("found_ids");
+		if (found) {
+			$found_ids = JSON.parse(found);
+		}
+
+		if (urlParams.has("found")) {
+			$found_ids = ["3","4","6"];
+		}
+
+		found_ids.subscribe(ids => {
+			if (!urlParams.has("found")) {
+				localStorage.setItem("found_ids", JSON.stringify(ids));
+			}
 		})
 	});
 </script>

@@ -58,18 +58,24 @@
 
 <h2>Your collection</h2>
 
-<div class="found-list bg-accent round">
-	{#key position_changed_counter}
-		{#each database as place}
-			{#if $found_ids.includes(place.id)}
-				<a href={`/place/${place.id}`} class="found-item">
-					<div></div>
-					<div>{place.title}</div>
-				</a>
-			{/if}
-		{/each}
-	{/key}
-</div>
+
+{#if $found_ids.length > 0}
+	<div class="found-list bg-accent round">
+		{#key position_changed_counter}
+			{#each database as place}
+				{#if $found_ids.includes(place.id)}
+					<a href={`/place/${place.id}`} class="found-item">
+						<div></div>
+						<div>{place.title}</div>
+					</a>
+				{/if}
+			{/each}
+		{/key}
+	</div>
+{:else}
+	<p>Start capturing places to add them to your collection</p>
+{/if}
+
 
 <style>
 

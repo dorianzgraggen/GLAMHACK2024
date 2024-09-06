@@ -1,7 +1,12 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
+	import { found_ids } from '$lib/stores';
     import { onMount, createEventDispatcher } from 'svelte';
 
-    const dispatch = createEventDispatcher();
+    
+
+    // const dispatch = createEventDispatcher(); // TODO: why?
 
     let video: HTMLVideoElement;
     let stream: MediaStream | null = null;
@@ -42,11 +47,17 @@
         capturedImageUrl = canvas.toDataURL('image/jpeg');
 
         showCapturedView = true; // Switch to captured view
-        dispatch('imageCaptured', capturedImageUrl);
+        // dispatch('imageCaptured', capturedImageUrl); // TODO: why?
     }
 
     function continueAction() {
         console.log("Learn more button clicked");
+
+        if (!$found_ids.includes($page.params.slug))
+        {
+            $found_ids = [...$found_ids, $page.params.slug];
+        }
+        goto(`/place/${$page.params.slug}`)
     }
 
     function retakePicture() {
