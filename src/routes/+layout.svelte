@@ -84,14 +84,6 @@
 </div>
 
 
-<div style="display: none">
-
-	{#each database as place}
-		<a href={"/place/" + place.id}></a>
-		<!-- <a href={"/place/" + place.id + "/camera"}></a> -->
-	{/each}
-</div>
-
 
 {:else if  $allowed_gps === GPSState.Unknown}
 
@@ -124,6 +116,16 @@
 	</div>
 
 {/if}
+
+
+<div style="display: none">
+
+	{#each database as place}
+		<a href={"/place/" + place.id}></a>
+		<a href={"/place/" + place.id + "/camera"}></a>
+	{/each}
+</div>
+
 
 
 <style>
