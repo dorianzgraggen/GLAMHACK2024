@@ -18,7 +18,7 @@
     // Function to initialize the camera stream
     async function startCamera() {
         try {
-            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
             if (video) {
                 video.srcObject = stream;
             }
@@ -45,6 +45,9 @@
         canvas.height = video.videoHeight;
         canvas.getContext('2d')?.drawImage(video, 0, 0);
         capturedImageUrl = canvas.toDataURL('image/jpeg');
+
+        const id = 'user_picture_' + $page.params.slug;
+		localStorage.setItem(id, capturedImageUrl);
 
         showCapturedView = true; // Switch to captured view
         // dispatch('imageCaptured', capturedImageUrl); // TODO: why?

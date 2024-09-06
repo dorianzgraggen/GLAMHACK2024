@@ -44,9 +44,47 @@
 		dots = document.getElementsByClassName("dot") as HTMLCollectionOf<HTMLElement>;
 		showSlides(0);
 	});
+
+	const id = 'user_picture_' + $page.params.slug;
 </script>
 
+
+<div class="background" style={`background-image: url(${localStorage.getItem(id)})`}></div>
+
+<h1>{place?.title}</h1>
+
+<!-- Slideshow container -->
+<div class="slideshow-container">
+
+	<!-- The images -->
+	{#each place.images as img_file}
+	<div class="mySlides">
+		<img src="/img/{img_file}" alt="{place.title}">
+	</div>
+	{/each}
+	<!-- Next and previous buttons -->
+	<a class="prev" on:click={() => plusSlides(-1)}>&#10094;</a>
+	<a class="next" on:click={() => plusSlides(1)} >&#10095;</a>
+  </div>
+  <br>
+
+  <!-- The dots/circles -->
+  <div style="text-align:center">
+	{#each place.images as img_file, i}
+		<span class="dot" on:click={() => currentSlide(i)}></span>
+	{/each}
+  </div>
+
+<div>{place?.description}</div>
+
+
 <style>
+	.background {
+		height: 50vh;
+		background-size: cover;
+		background-position: center;
+	}
+
 	/* Slideshow container */
 	.slideshow-container {
 		width: 50vw;
@@ -104,30 +142,3 @@
 		background-color: #717171;
 	}
 </style>
-
-
-<h1>{place?.title}</h1>
-
-<!-- Slideshow container -->
-<div class="slideshow-container">
-
-	<!-- The images -->
-	{#each place.images as img_file}
-	<div class="mySlides">
-		<img src="/img/{img_file}" alt="{place.title}">
-	</div>
-	{/each}
-	<!-- Next and previous buttons -->
-	<a class="prev" on:click={() => plusSlides(-1)}>&#10094;</a>
-	<a class="next" on:click={() => plusSlides(1)} >&#10095;</a>
-  </div>
-  <br>
-
-  <!-- The dots/circles -->
-  <div style="text-align:center">
-	{#each place.images as img_file, i}
-		<span class="dot" on:click={() => currentSlide(i)}></span>
-	{/each}
-  </div>
-
-<div>{place?.description}</div>
