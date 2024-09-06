@@ -56,7 +56,7 @@
 </div>
 
 
-<h2>Found</h2>
+<h2>Your collection</h2>
 
 <div class="found-list bg-accent round">
 	{#key position_changed_counter}
@@ -128,5 +128,7 @@
 
 	h2 {
 		font-size: 16px;
+		margin-top: 30px;
+		margin-bottom: 10px;
 	}
 </style>
