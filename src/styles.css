@@ -47,8 +47,29 @@ body {
 
 *, .regular {
     font-family: 'Inter Regular';
+    user-select: none;
+}
+
+p {
+    user-select: auto;
 }
 
 .bold, h1, h2, h3, h4, h5, h6 {
     font-family: "Poppins Bold";
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    color: white;
+    background-color: var(--accent-strong);
+    font-family: "Poppins Bold";
+    border: 0;
+    border-radius: 200px;
+    padding: 12px 26px;
+    cursor: pointer;
 }

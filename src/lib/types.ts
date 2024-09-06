@@ -7,3 +7,12 @@ export type Place = {
     images: string[];
     distance: number;
 };
+
+
+export enum GPSState {
+    Unknown,
+    Unsupported,
+    Declined,
+    Checking,
+    Ready
+}

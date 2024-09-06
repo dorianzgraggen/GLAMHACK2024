@@ -6,9 +6,7 @@ lines.shift();
 
 
 export const database: Array<Place> = lines.map(line => {
-    console.log("line", line)
     const l = line.split(";")
-    console.log("l", l);
     return {
         id: l[0],
         title: l[1],

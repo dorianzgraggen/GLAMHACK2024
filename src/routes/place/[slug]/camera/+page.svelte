@@ -84,7 +84,7 @@
                 <div class="dialog-content">
                     <p>To get access to the very exciting information about this monument you need to take an almost identical image of the historical one above</p>
                     <div class="button-container">
-                        <button on:click={closeDialog}>Got it!</button>
+                        <button class="btn" on:click={closeDialog}>Got it!</button>
                     </div>
                 </div>
             </div>

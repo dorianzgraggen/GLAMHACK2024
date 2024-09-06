@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { found_ids, gps_accuracy, latitude, longitude, pictures_index, pinned_place_id } from '$lib/stores';
+	import { allowed_gps, found_ids, gps_accuracy, latitude, longitude, pictures_index, pinned_place_id } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import "../styles.css"
 	import { database } from '$lib/data';
 	import { page } from '$app/stores';
+	import { GPSState } from '$lib/types';
 
 
 	onMount(async () => {
@@ -15,22 +16,6 @@
 		pictures_index.subscribe((v) => {
 			localStorage.setItem('pictures_index', '' + v);
 		});
-
-		navigator.geolocation.watchPosition(
-			(position) => {
-				console.log('position', position);
-				$gps_accuracy = position.coords.accuracy;
-				$longitude = position.coords.longitude;
-				$latitude = position.coords.latitude;
-			},
-			(error) => {
-				console.error(error);
-			},
-			{
-				maximumAge: 0,
-				enableHighAccuracy: true
-			}
-		);
 
 		const id = localStorage.getItem("pinned_place_id");
 		if (id) {
@@ -55,13 +40,44 @@
 			}
 		})
 	});
+
+	function startGPS() {
+		if (typeof navigator.geolocation === "undefined") {
+			$allowed_gps = GPSState.Unsupported;
+			return;
+		}
+
+		$allowed_gps = GPSState.Checking;
+
+		navigator.geolocation.watchPosition(
+			(position) => {
+				console.log('position', position);
+				$gps_accuracy = position.coords.accuracy;
+				$longitude = position.coords.longitude;
+				$latitude = position.coords.latitude;
+				$allowed_gps = GPSState.Ready;
+			},
+			(error) => {
+				console.error(error);
+				$allowed_gps = GPSState.Declined;
+			},
+			{
+				maximumAge: 0,
+				enableHighAccuracy: true
+			}
+		);
+	}
 </script>
+
 
 <div class="bg-accent-strong top-nav">
 	<a href="/">
 		<h1>Catchy Name</h1>
 	</a>
 </div>
+
+{#if $allowed_gps === GPSState.Ready }
+
 
 <div class="content">
 	<slot></slot>
@@ -76,7 +92,54 @@
 	{/each}
 </div>
 
+
+{:else if  $allowed_gps === GPSState.Unknown}
+
+	<div class="pre-screen">
+		<div>
+			<p>This app needs access to your GPS to function.</p>
+			<button class="btn" on:click={() => startGPS()}>Enable GPS</button>
+		</div>
+	</div>
+
+{:else if  $allowed_gps === GPSState.Declined}
+
+	<div class="pre-screen">
+		<div>
+			<p>Please go to page settings and allow this page to access your location.</p>
+			<button class="btn" on:click={() => window.location.reload()}>Reload Page</button>
+		</div>
+	</div>
+
+{:else if  $allowed_gps === GPSState.Checking}
+
+	<div class="pre-screen">
+		<p>Checking permissions...</p>
+	</div>
+
+{:else}
+
+	<div class="pre-screen">
+		<p>this device does not support the gps api</p>
+	</div>
+
+{/if}
+
+
 <style>
+
+	.pre-screen {
+		position: absolute;
+		top: 27px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding: 20px;
+	}
 
 	h1 {
 		font-size: 18px;
