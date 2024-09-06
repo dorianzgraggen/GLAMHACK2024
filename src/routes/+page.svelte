@@ -30,15 +30,16 @@
 <div class="banner round"></div>
 
 <h2>Your pinned priority</h2>
+{#key $longitude}
+	{#if pinned_place}
+		<PlaceListItem place={pinned_place}></PlaceListItem>
+	{:else}
+	<div class="no-pin round">
 
-{#if pinned_place}
-	  <PlaceListItem place={pinned_place}></PlaceListItem>
-{:else}
-<div class="no-pin round">
-
-	<p>Pin a place to see it here</p>
-</div>
-{/if}
+		<p>Pin a destination to see it here</p>
+	</div>
+	{/if}
+{/key}
 
 <h2>Your next destination</h2>
 
@@ -82,7 +83,7 @@
 
 	.no-pin {
 		display: flex;
-		height: 200px;
+		height: 228px;
 		outline: 2px dashed var(--accent);
   		background: none;
 		align-items: center;

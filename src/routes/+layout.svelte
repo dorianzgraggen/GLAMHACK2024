@@ -38,7 +38,9 @@
 </script>
 
 <div class="bg-accent-strong top-nav">
-	<h1>Explore By Finding</h1>
+	<a href="/">
+		<h1>Catchy Name</h1>
+	</a>
 </div>
 
 <div class="content">
@@ -55,6 +57,11 @@
 	.top-nav {
 		color: white;
 		padding: 12px;
+	}
+
+	.top-nav a {
+		text-decoration: none;
+		color: white;
 	}
 
 	.content {
