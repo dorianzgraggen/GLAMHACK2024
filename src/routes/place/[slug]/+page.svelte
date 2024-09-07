@@ -117,6 +117,8 @@
         margin-top: -5px; /* Overlapping effect */
         transition: margin-top 0.2s;
         box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2); /* Adding shadow for better distinction */
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .rest.large_user_image {
