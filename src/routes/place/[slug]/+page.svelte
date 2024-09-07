@@ -114,12 +114,13 @@
         padding-top: 20px;
         background-color: white;
         border-radius: 20px 20px 0 0;
-        margin-top: 40vh;
+        margin-top: -5px; /* Overlapping effect */
         transition: margin-top 0.2s;
+        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2); /* Adding shadow for better distinction */
     }
 
     .rest.large_user_image {
-        margin-top: 85vh;
+        margin-top: -85px;
     }
 
     .rest > * {
@@ -144,7 +145,7 @@
     /* Slideshow container */
     .slideshow-container {
         width: 80vw;
-        height: auto;
+        height: 50vh; /* Set fixed height for the slideshow container */
         position: relative;
         margin: auto;
         border-radius: 10px;
@@ -157,10 +158,10 @@
     }
 
     .mySlides img {
-        width: 100%; /* Ensure the image takes the full width of the container */
-        height: 50vh; /* Maintain the same height for all images */
+        width: 100%;
+        height: 100%; /* The image now fills the container fully */
+        object-fit: cover; /* Ensures the image fills the frame, cropping the excess parts if necessary */
         border-radius: 10px;
-        object-fit: cover; /* Ensures the image maintains aspect ratio and fills the container */
     }
 
     /* Next & previous buttons */
