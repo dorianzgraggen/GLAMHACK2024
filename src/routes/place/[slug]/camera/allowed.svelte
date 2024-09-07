@@ -129,7 +129,9 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        /* height: 100%; */
+        bottom: 0;
+        top: 51px;
         background-color: black;
         z-index: 1000;
         display: flex;
