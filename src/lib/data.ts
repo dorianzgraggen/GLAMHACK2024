@@ -1,9 +1,10 @@
 import raw_csv from "../data.csv?raw"
 import type { Place } from "$lib/types"
 
+
+// Read data form csv
 const lines = raw_csv.split(/\r?\n/).filter((l) => l.length > 6);
 lines.shift();
-
 
 export const database: Array<Place> = lines.map(line => {
     const l = line.split(";")
