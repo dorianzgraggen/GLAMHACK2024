@@ -53,30 +53,39 @@
 
 <button class:large_user_image class="bg-btn" on:click={() => large_user_image = !large_user_image}></button>
 <div class="rest round-top" class:large_user_image>
-    <h1>{place?.title}</h1>
+    <div class="main-body">
 
-    <!-- Slideshow container -->
-    <div class="slideshow-container">
-        <!-- The images -->
-        {#each place.images as img_file}
-        <div class="mySlides">
-            <img src="/img/{img_file}" alt="{place.title}">
+        <h1>{place?.title}</h1>
+
+        <!-- Slideshow container -->
+        <div class="slideshow-container">
+            <!-- The images -->
+            {#each place.images as img_file, i}
+            <div class="mySlides">
+                <img src="/img/{img_file}" alt="{place.title}">
+                <div class="caption">{i} - {place.image_description[i]}</div>
+            </div>
+            {/each}
+            {#if place.images.length > 1}
+                <!-- Next and previous buttons -->
+                <a class="prev" on:click={() => plusSlides(-1)}>&#10094;</a>
+                <a class="next" on:click={() => plusSlides(1)} >&#10095;</a>
+            {/if}
         </div>
-        {/each}
-        <!-- Next and previous buttons -->
-        <a class="prev" on:click={() => plusSlides(-1)}>&#10094;</a>
-        <a class="next" on:click={() => plusSlides(1)} >&#10095;</a>
-    </div>
-    <br>
+        <br>
 
-    <!-- The dots/circles -->
-    <div style="text-align:center">
-        {#each place.images as img_file, i}
-            <span class="dot" on:click={() => currentSlide(i)}></span>
-        {/each}
-    </div>
+        {#if place.images.length > 1}
+            <!-- The dots/circles -->
+            <div style="text-align:center">
+                {#each place.images as img_file, i}
+                    <span class="dot" on:click={() => currentSlide(i)}></span>
+                {/each}
+            </div>
+        {/if}
 
-    <div class="description-text">{place?.description}</div>
+        <div class="description-text">{place?.description}</div>
+        
+    </div>
 </div>
 
 <style>
@@ -144,6 +153,12 @@
         margin: 0 20px;
     }
 
+    .main-body {
+        width: 80%;
+        max-width: 1920px;
+        margin: auto;
+    }
+
     /* Slideshow container */
     .slideshow-container {
         width: 80vw;
@@ -176,6 +191,17 @@
         border-radius: 10px;
         justify-content: center;
         align-items: center;
+    }
+
+    /* Image-caption */
+    .caption {
+        background-color: var(--accent);
+        font-size: 15px;
+        padding: 8px 12px;
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        text-align: center;
     }
 
     /* Next & previous buttons */

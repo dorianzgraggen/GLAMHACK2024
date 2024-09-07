@@ -25,6 +25,7 @@ export type Place = {
     longitude: number;
     latitude: number;
     images: string[];
+    image_description: string;
     distance: number;
 };
 

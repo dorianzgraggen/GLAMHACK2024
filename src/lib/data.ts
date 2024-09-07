@@ -15,6 +15,7 @@ export const database: Array<Place> = lines.map(line => {
         longitude: Number(l[3]),
         latitude: Number(l[4]),
         images: l[5].split(","),
+        image_description: l[6].split("|"),
         distance: 0,
     }
 })

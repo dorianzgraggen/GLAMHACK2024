@@ -29,6 +29,15 @@
 
 	<div class="banner round"></div>
 
+	<!-- Description of the app -->
+	<div class="description">
+		<p>
+			Explore the historical sites of Lucerne and snap photos to learn about them. Remember, you can only take pictures when you’re within 75 steps.<br/>
+			<br/>
+			Mark your next destination and start your adventure — gotta catch 'em all!
+		</p>
+	</div>
+
 	<h2>Your pinned priority</h2>
 	{#key $longitude}
 		{#if pinned_place && !$found_ids.includes($pinned_place_id)}
@@ -88,6 +97,7 @@
 		background-position: center;
 		width: 100%;
 		aspect-ratio: 2.8;
+		margin-bottom: 20px;
 	}
 
 	.no-pin {
@@ -138,5 +148,17 @@
 		font-size: 16px;
 		margin-top: 30px;
 		margin-bottom: 10px;
+	}
+
+	.description {
+		background-color: var(--accent);
+		padding: 20px;
+		margin: auto;
+		text-align: justify;
+		border-radius: 20px;
+	}
+
+	.description > p {
+		margin: 0px;
 	}
 </style>
