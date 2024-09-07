@@ -67,7 +67,7 @@
 				{#each database as place}
 					{#if $found_ids.includes(place.id)}
 						<a href={`/place/${place.id}`} class="found-item">
-							<div></div>
+							<div style="background-image: url('/img/{place.images[0]}');"></div>
 							<div>{place.title}</div>
 						</a>
 					{/if}
@@ -129,7 +129,6 @@
 	.found-item > div:first-child {
 		width: 80px;
 		height: 80px;
-		background-image: url(https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x4.jpg);
 		background-size: cover;
 		background-position: center;
 		border-radius: 9999px;
