@@ -78,7 +78,7 @@
         
         <div class="reference-image">
             <img src="/img/2.jpg" alt="Reference image" />
-            <div class="expand-icon">↗</div>
+            <div class="expand-icon" class:isDialogOpen>↗</div>
             <div class="arrow"></div>
         </div>
         
@@ -151,7 +151,8 @@
         height: 100px;
         border: 2px solid white;
         border-radius: 10px;
-        overflow: hidden;
+        /* overflow: hidden; */
+        z-index: 2;
     }
 
     .reference-image img {
@@ -162,11 +163,33 @@
 
     .expand-icon {
         position: absolute;
-        bottom: 5px;
-        right: 5px;
+        bottom: -34px;
         color: white;
-        font-size: 20px;
+        font-size: 26px;
+        left: -28px;
         text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        animation: arrow-move 1s linear infinite;
+        display: none;
+    }
+
+    .expand-icon.isDialogOpen {
+        display: block;
+    }
+
+    @keyframes arrow-move {
+        0% {
+            transform: translate(0, 0);
+        }
+
+
+        50% {
+            transform: translate(-4px, 4px);
+        }
+
+
+        100% {
+            transform: translate(0, 0);
+        }
     }
 
     .arrow {
@@ -179,6 +202,7 @@
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
         border-top: 20px solid white;
+        display: none;
     }
 
     .dialog-overlay {
