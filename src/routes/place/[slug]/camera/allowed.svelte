@@ -4,7 +4,9 @@
 	import { found_ids } from '$lib/stores';
     import { onMount, createEventDispatcher } from 'svelte';
 
-    
+    export let slug = $page.params.slug;
+    import { database } from '$lib/data';
+    const place = database.find(e => e.id == slug)!;
 
     // const dispatch = createEventDispatcher(); // TODO: why?
 
@@ -77,7 +79,7 @@
         <video bind:this={video} autoplay playsinline></video>
         
         <div class="reference-image">
-            <img src="/img/2.jpg" alt="Reference image" />
+            <img src="/img/{place?.images[0]}" alt="Reference image" />
             <div class="expand-icon" class:isDialogOpen>↗</div>
             <div class="arrow"></div>
         </div>
@@ -112,7 +114,7 @@
             </div>
 
             <div class="reference-image-bottom">
-                <img src="/img/2.jpg" alt="Reference image" />
+                <img src="/img/{place?.images[0]}" alt="Reference image" />
             </div>
 
             <div class="button-container-captured">
