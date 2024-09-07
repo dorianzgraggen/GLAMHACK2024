@@ -1,4 +1,4 @@
-import raw_csv from "../data.csv?raw"
+import raw_csv from "../data-new.csv?raw"
 import type { Place } from "$lib/types"
 
 const lines = raw_csv.split(/\r?\n/).filter((l) => l.length > 6);
