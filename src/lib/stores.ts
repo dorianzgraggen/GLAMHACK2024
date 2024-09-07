@@ -13,3 +13,4 @@ export const pinned_place_id = writable("");
 export const found_ids = writable<Array<string>>([]);
 
 export const allowed_gps = writable<GPSState>(GPSState.Unknown);
+export const ignore_distance_check = writable(false);
