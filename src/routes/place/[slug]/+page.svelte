@@ -63,7 +63,7 @@
             {#each place.images as img_file, i}
             <div class="mySlides">
                 <img src="/img/{img_file}" alt="{place.title}">
-                <div class="caption">{i} - {place.image_description[i]}</div>
+                <div class="caption">{place.image_description[i]}</div>
             </div>
             {/each}
             {#if place.images.length > 1}
