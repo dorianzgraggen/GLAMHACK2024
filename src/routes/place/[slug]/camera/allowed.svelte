@@ -347,7 +347,7 @@
 
     .retake-btn, .continue-btn {
         background-color: #b5d4f5;
-        color: #333;
+        color: #fff;
         font-size: 18px;
         font-weight: bold;
         border: none;
