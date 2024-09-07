@@ -149,7 +149,7 @@
         position: relative;
         margin: auto;
         border-radius: 10px;
-        background-color: black;
+        background-color: var(--accent);
         overflow: hidden;
         justify-content: center;
         align-items: center;

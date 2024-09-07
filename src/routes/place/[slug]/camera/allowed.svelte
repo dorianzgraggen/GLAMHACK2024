@@ -310,34 +310,42 @@
     .captured-image-container {
         width: 90%;
         height: 40%;
-        border-radius: 15px;
+        border-radius: 10px;
         border: 3px solid #ddd;
         overflow: hidden;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         margin-bottom: 20px;
+        background-color: var(--accent);
     }
 
     .captured-image {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
         border-radius: 15px;
     }
 
     .reference-image-bottom {
         width: 90%;
-        height: 30%;
-        border-radius: 15px;
+        height: 40%;
+        border-radius: 10px;
         border: 3px solid #ddd;
         overflow: hidden;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+        background-color: var(--accent);
     }
 
     .reference-image-bottom img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
         border-radius: 15px;
     }
 
