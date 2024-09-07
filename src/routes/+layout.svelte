@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { allowed_gps, found_ids, gps_accuracy, latitude, longitude, pictures_index, pinned_place_id } from '$lib/stores';
+	import { allowed_gps, found_ids, gps_accuracy, ignore_distance_check, latitude, longitude, pictures_index, pinned_place_id } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import "../styles.css"
 	import { database } from '$lib/data';
@@ -39,6 +39,10 @@
 				localStorage.setItem("found_ids", JSON.stringify(ids));
 			}
 		})
+
+		if (urlParams.has("ignoreDistance")) {
+			$ignore_distance_check = true;
+		}
 	});
 
 	function startGPS() {

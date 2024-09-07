@@ -149,19 +149,31 @@
         position: relative;
         margin: auto;
         border-radius: 10px;
+        background-color: black;
         overflow: hidden;
+        justify-content: center;
+        align-items: center;
     }
 
     /* Hide the images by default */
     .mySlides {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        margin: auto;
         display: none;
+        justify-content: center;
+        align-items: center;
     }
 
     .mySlides img {
         width: 100%;
-        height: 100%; /* The image now fills the container fully */
-        object-fit: cover; /* Ensures the image fills the frame, cropping the excess parts if necessary */
+        height: 100%;
+        object-fit: contain;
+        margin: auto;
         border-radius: 10px;
+        justify-content: center;
+        align-items: center;
     }
 
     /* Next & previous buttons */
