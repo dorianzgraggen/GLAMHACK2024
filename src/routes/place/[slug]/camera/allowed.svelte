@@ -93,6 +93,8 @@
             </div>
         {/if}
 
+        <div class="camera-bg"></div>
+
         <div class="camera-controls" class:active={canCapture}>
             <button on:click={captureImage} class="capture-btn" disabled={!canCapture}>
                 <div class="capture-btn-inner"></div>
@@ -127,7 +129,9 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        /* height: 100%; */
+        bottom: 0;
+        top: 51px;
         background-color: black;
         z-index: 1000;
         display: flex;
@@ -231,9 +235,18 @@
         margin-top: 20px;
     }
 
+    .camera-bg {
+        background-color: #00000090;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 102px;
+    }
+
     .camera-controls {
         position: absolute;
-        bottom: 20px;
+        bottom: 16px;
         left: 0;
         right: 0;
         display: flex;
