@@ -29,7 +29,8 @@
                 {place?.distance} steps
             </p>
                 
-                <p>away from this spot. Get closer to capture it.</p>
+                <p>away from this spot. </p>
+                <p>Get closer to capture it.</p>
             <button class="btn" on:click={() => window.history.back()}>Go Back</button>
         </div>
     </div>

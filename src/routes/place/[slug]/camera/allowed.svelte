@@ -87,7 +87,7 @@
         {#if isDialogOpen}
             <div class="dialog-overlay">
                 <div class="dialog-content">
-                    <p>To get access to the very exciting information about this monument you need to take an image of it.</p>
+                    <p>Take a picture of the monument to learn more about it.</p>
                     <div class="button-container">
                         <button class="btn" on:click={closeDialog}>Got it!</button>
                     </div>
@@ -118,7 +118,7 @@
             </div>
 
             <div class="button-container-captured">
-                <button on:click={retakePicture} class="retake-btn btn">Retake Picture</button>
+                <button on:click={retakePicture} class="retake-btn btn">Retry</button>
                 <button on:click={continueAction} class="continue-btn btn">Learn more</button>
             </div>
         </div>

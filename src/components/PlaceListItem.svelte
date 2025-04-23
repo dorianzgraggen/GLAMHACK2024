@@ -42,7 +42,7 @@
 
     <div class="place-info">
         <h3 class="regular">{place.title}</h3>
-        <div class="bold">{place.distance} Steps left</div>
+        <div class="bold">{place.distance} Steps away</div>
 
         <div class="camera-btn-root">
             <a href={`/place/${place.id}/camera`} class="camera-btn" class:close={place.distance < 75}>

@@ -39,7 +39,7 @@
 		</p>
 	</div> -->
 
-	<h2>Your pinned priority</h2>
+	<h2>Your pinned destination</h2>
 	{#key $longitude}
 		{#if pinned_place && !$found_ids.includes($pinned_place_id)}
 			<PlaceListItem place={pinned_place} wide={true}></PlaceListItem>
