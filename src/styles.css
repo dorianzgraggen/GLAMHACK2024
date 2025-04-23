@@ -1,12 +1,15 @@
-body {
-    margin: 0;
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
 :root {
     --accent: #DFE7F7;
-    --accent-strong: #97B8E2;
+    --accent-strong: #0056C3;
 }
 
+body {
+    margin: 0;
+}
 
 .round {
     border-radius: 10px;
@@ -45,6 +48,11 @@ body {
     src: url('/fonts/static/Inter_18pt-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Tilt Warp';
+    src: url('/fonts/Tilt_Warp/TiltWarp-Regular-VariableFont_XROT,YROT.ttf');
+}
+
 *, .regular {
     font-family: 'Inter Regular';
     /* user-select: none; */
@@ -55,7 +63,8 @@ p {
 }
 
 .bold, h1, h2, h3, h4, h5, h6 {
-    font-family: "Poppins Bold";
+    font-family: "Tilt Warp";
+    font-weight: 400;
 }
 
 .flex-center {
@@ -72,4 +81,15 @@ p {
     border-radius: 200px;
     padding: 12px 26px;
     cursor: pointer;
+}
+
+
+.content > div > * {
+    margin-left: 18px;
+    margin-right: 18px;
+}
+
+.content {
+    padding-bottom: 18px;
+    padding-top: 18px;
 }

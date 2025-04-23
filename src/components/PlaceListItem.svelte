@@ -3,6 +3,7 @@
 	import type { Place } from "$lib/types";
 
     export let place: Place;
+    export let wide: boolean = false;
 
     
     const img = "/img/" + place.images[0];
@@ -18,7 +19,7 @@
     }
 </script>
 
-<div class="place bg-accent round">
+<div class="place bg-accent round" class:wide>
     <div class="img" style={`background-image: url(${img})`}></div>
 
     <button class="pin" on:click={pin}>
@@ -39,18 +40,24 @@
     </button>
 
 
-    <h3 class="regular">{place.title}</h3>
-    <div class="bold">{place.distance} Steps left</div>
+    <div class="place-info">
+        <h3 class="regular">{place.title}</h3>
+        <div class="bold">{place.distance} Steps left</div>
 
-    <div>
-        <a href={`/place/${place.id}/camera`} class="camera-btn" class:close={place.distance < 75}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14.5 4H9.5L7 7H4C3.46957 7 2.96086 7.21071 2.58579 7.58579C2.21071 7.96086 2 8.46957 2 9V18C2 18.5304 2.21071 19.0391 2.58579 19.4142C2.96086 19.7893 3.46957 20 4 20H20C20.5304 20 21.0391 19.7893 21.4142 19.4142C21.7893 19.0391 22 18.5304 22 18V9C22 8.46957 21.7893 7.96086 21.4142 7.58579C21.0391 7.21071 20.5304 7 20 7H17L14.5 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12 16C13.6569 16 15 14.6569 15 13C15 11.3431 13.6569 10 12 10C10.3431 10 9 11.3431 9 13C9 14.6569 10.3431 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+        <div class="camera-btn-root">
+            <a href={`/place/${place.id}/camera`} class="camera-btn" class:close={place.distance < 75}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.5 4H9.5L7 7H4C3.46957 7 2.96086 7.21071 2.58579 7.58579C2.21071 7.96086 2 8.46957 2 9V18C2 18.5304 2.21071 19.0391 2.58579 19.4142C2.96086 19.7893 3.46957 20 4 20H20C20.5304 20 21.0391 19.7893 21.4142 19.4142C21.7893 19.0391 22 18.5304 22 18V9C22 8.46957 21.7893 7.96086 21.4142 7.58579C21.0391 7.21071 20.5304 7 20 7H17L14.5 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 16C13.6569 16 15 14.6569 15 13C15 11.3431 13.6569 10 12 10C10.3431 10 9 11.3431 9 13C9 14.6569 10.3431 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 
-        </a>
+                    {#if wide}
+                        <span class="tap"> Tap to take image</span>
+                    {/if}
+            </a>
+        </div>
     </div>
+
 
 </div>
 
@@ -64,6 +71,12 @@
         flex-direction: column;
         padding-top: 20px;
         padding-bottom: 0px;
+    }
+
+    .wide.place  {
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        padding: 12px;
     }
 
     .img {
@@ -83,15 +96,43 @@
         border: 0;
     }
 
+    .place-info {
+        text-align: center;
+    }
+
+    .wide .place-info {
+        text-align: left;
+    }
+
+    .wide .bold {
+        font-size: 20px;
+    }
+
     h3 {
         font-size: 16px;
         margin-top: 8px;
         margin-bottom: 8px;
     }
 
+    .camera-btn-root {
+        display: flex;
+        justify-content: center;
+    }
+
+    .wide .camera-btn-root {
+        justify-content: left;
+    }
+
     .camera-btn {
         padding: 12px 20px;
         display: flex;
+        text-decoration: none;
+        color: black;
+
+    }
+
+    .wide .camera-btn {
+        padding: 12px 0px;
     }
 
     .camera-btn svg {
@@ -100,6 +141,11 @@
 
     .camera-btn.close svg {
         animation: camera-blink 3s linear infinite;
+    }
+
+    .tap {
+        margin-left: 10px;
+        margin-top: 2px;
     }
 
     @keyframes camera-blink {

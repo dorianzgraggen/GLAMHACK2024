@@ -26,22 +26,23 @@
 
 
 <div>
-
-	<div class="banner round"></div>
+	<div class="banner round">
+		<h2>Lucerne</h2>
+	</div>
 
 	<!-- Description of the app -->
-	<div class="description">
+	<!-- <div class="description">
 		<p>
 			Explore the historical sites of Lucerne and snap photos to learn about them. Remember, you can only take pictures when you’re within 75 steps.<br/>
 			<br/>
 			Mark your next destination and start your adventure — gotta catch 'em all!
 		</p>
-	</div>
+	</div> -->
 
 	<h2>Your pinned priority</h2>
 	{#key $longitude}
 		{#if pinned_place && !$found_ids.includes($pinned_place_id)}
-			<PlaceListItem place={pinned_place}></PlaceListItem>
+			<PlaceListItem place={pinned_place} wide={true}></PlaceListItem>
 		{:else}
 		<div class="no-pin round">
 
@@ -92,17 +93,29 @@
 <style>
 
 	.banner {
-		background-image: url(/Martiniplan_Luzern.jpg);
+		background-image: url(/lion.jpg);
 		background-size: cover;
 		background-position: center;
-		width: 100%;
+		/* width: 100%; */
 		aspect-ratio: 2.8;
 		margin-bottom: 20px;
+		display: flex;
+		align-items: center;
+	}
+
+	.banner h2 {
+		color: white;
+		text-align: center;
+		width: 100%;
+		margin: 0;
+		font-size: 40px;
+		text-shadow: 2px 4px 7px #00000082;
+		font-style: italic;
 	}
 
 	.no-pin {
 		display: flex;
-		height: 228px;
+		height: 133px;
 		outline: 2px dashed var(--accent);
   		background: none;
 		align-items: center;
@@ -110,13 +123,18 @@
 	}
 
 	.places {
-		width: 100%;
+		/* width: 100%; */
 		overflow-x: scroll;
 		display: grid;
 		grid-auto-flow: column;
 		gap: 12px;
 		grid-auto-columns: 140px;
+		margin-left: 0;
+		margin-right: 0;
+		padding-left: 18px;
+		padding-right: 18px;
 	}
+
 
 	.found-list {
 		display: grid;
@@ -153,7 +171,6 @@
 	.description {
 		background-color: var(--accent);
 		padding: 20px;
-		margin: auto;
 		text-align: justify;
 		border-radius: 20px;
 	}

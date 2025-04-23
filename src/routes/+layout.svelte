@@ -76,7 +76,7 @@
 
 <div class="bg-accent-strong top-nav">
 	<a href="/">
-		<h1>Catchy Name</h1>
+		<h1>snap&go</h1>
 	</a>
 </div>
 
@@ -136,7 +136,7 @@
 
 	.pre-screen {
 		position: absolute;
-		top: 27px;
+		top: 47px;
 		bottom: 0;
 		left: 0;
 		right: 0;
@@ -162,7 +162,7 @@
 		color: white;
 	}
 
-	:global(.content > *) {
-		margin: 18px;
-	}
+	/* :global(.content > *) {
+		padding: 18px;
+	} */
 </style>

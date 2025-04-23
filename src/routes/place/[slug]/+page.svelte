@@ -35,8 +35,10 @@
             for (i = 0; i < dots.length; i++) {
                 dots[i].className = dots[i].className.replace(" active", "");
             }
-            slides[slideIndex-1].style.display = "block";
-            dots[slideIndex-1].className += " active";
+            slides[Math.max(0, slideIndex-1)].style.display = "block"; // no idea wtf is going on
+            if (slides.length > 1) {
+                dots[slideIndex - 1].className += " active";
+            }
         }
     }
     onMount(() => {

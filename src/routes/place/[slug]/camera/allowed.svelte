@@ -87,7 +87,7 @@
         {#if isDialogOpen}
             <div class="dialog-overlay">
                 <div class="dialog-content">
-                    <p>To get access to the very exciting information about this monument you need to take an almost identical image of the historical one above</p>
+                    <p>To get access to the very exciting information about this monument you need to take an image of it.</p>
                     <div class="button-container">
                         <button class="btn" on:click={closeDialog}>Got it!</button>
                     </div>
@@ -118,8 +118,8 @@
             </div>
 
             <div class="button-container-captured">
-                <button on:click={retakePicture} class="retake-btn">Retake Picture</button>
-                <button on:click={continueAction} class="continue-btn">Learn more</button>
+                <button on:click={retakePicture} class="retake-btn btn">Retake Picture</button>
+                <button on:click={continueAction} class="continue-btn btn">Learn more</button>
             </div>
         </div>
     {/if}
@@ -133,7 +133,7 @@
         width: 100%;
         /* height: 100%; */
         bottom: 0;
-        top: 51px;
+        top:47px;
         background-color: black;
         z-index: 1000;
         display: flex;
@@ -221,6 +221,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 0;
     }
 
     .dialog-content {
@@ -244,6 +245,7 @@
         left: 0;
         right: 0;
         height: 102px;
+        margin: 0;
     }
 
     .camera-controls {
@@ -255,6 +257,7 @@
         justify-content: center;
         opacity: 0.5;
         transition: opacity 0.3s ease;
+        margin: 0;
     }
 
     .camera-controls.active {
@@ -360,20 +363,5 @@
         margin-top: 20px;
     }
 
-    .retake-btn, .continue-btn {
-        background-color: #b5d4f5;
-        color: #fff;
-        font-size: 18px;
-        font-weight: bold;
-        border: none;
-        padding: 15px 30px;
-        border-radius: 30px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        margin: 0 10px;
-    }
-
-    .retake-btn:hover, .continue-btn:hover {
-        background-color: #a4c3e5;
-    }
+  
 </style>
